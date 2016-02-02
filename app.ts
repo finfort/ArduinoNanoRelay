@@ -1,5 +1,5 @@
-var five = require("johnny-five");
-var board = new five.Board({ port: "COM3" });
+import * as five from 'johnny-five';
+const board = new five.Board({ port: "COM3" });
 
 board.on("ready", function() {
 
