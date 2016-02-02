@@ -5,7 +5,7 @@
 			"name": "Launch",
 			"type": "node",
 			"request": "launch",
-			"program": "app.ts",
+			"program": "./app/server/app.ts",
             
 			"stopOnEntry": false,
 			"args": [],
@@ -18,8 +18,10 @@
 				"NODE_ENV": "development"
 			},
 			"externalConsole": false,
-			"sourceMaps": true,
-			"outDir": "bin"
+            "preLaunchTask": "",
+            "sourceMaps": true,
+            "outDir": "./app/server"
+			
 		},
 		{
 			"name": "Attach",
