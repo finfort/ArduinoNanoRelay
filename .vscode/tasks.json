@@ -20,9 +20,9 @@
 
 	// Show the output window only if unrecognized errors occur.
 	"showOutput": "silent",
-
+    // "outDir": "bin",
 	// args is the HelloWorld program to compile.
-	"args": ["app.ts", "--source-maps"],
+	"args": ["app.ts"],
 
 	// use the standard tsc problem matcher to find compile problems
 	// in the output.
