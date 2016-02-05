@@ -1,13 +1,9 @@
 //  tsc --sourcemap --outDir .\app\server\ .\app\server\app.ts
 var express = require('express');
-// import * as express from 'express';
 var app = express();
 var httpServer = require("http").createServer(app);
- import * as five from 'johnny-five';
+import * as five from 'johnny-five';
 var EtherPort = require("etherport");
- 
-//var five = require('johnny-five');
-
 var io = require('socket.io')(httpServer);
 
 var port = 3000;
@@ -19,29 +15,16 @@ app.get('/', function(req, res) {
 
 httpServer.listen(port);
 console.log('Server available at http://localhost:' + port);
+
 var relay;
 //Arduino board connection
- 
 var board = new five.Board({ 
   port: new EtherPort(3030) 
 });
-
 // var board = new five.Board({ port: "COM3" });
 board.on("ready", function() {
     console.log('Arduino connected');
     relay = new five.Relay(6);
-});
-
-board.on("fail", function(event) {
-  /*
-    Event {
-      type: "info"|"warn"|"fail",
-      timestamp: Time of event in milliseconds,
-      class: name of relevant component class,
-      message: message [+ ...detail]
-    }
-  */
-  console.log("%s sent a 'fail' message: %s", event.class, event.message);
 });
  
 //Socket connection handler
