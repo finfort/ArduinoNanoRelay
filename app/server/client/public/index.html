@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CODETutorial Mean seed</title>
+</head>
+
+<body>
+    <script src="bower_components/socket.io-client/socket.io.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+
+    <h1>{{"relay controller"}}</h1>
+    <div ng-controller="ArduController">
+        <button ng-click="relayOn()">On</button>
+        <button ng-click="relayOff()">Off</button>
+    </div>
+
+    <script type="text/javascript">
+        var app = angular.module('myApp', ['btford.socket-io']).
+    factory('mySocket', function (socketFactory) {
+        return socketFactory();
+    }).
+    controller('ArduController', function ($scope,mySocket) {
+ 
+        $scope.relayOn = function () {
+ 
+            mySocket.emit('relay:on');
+            console.log('relay ON');
+        };
+ 
+ 
+        $scope.relayOff = function () {
+ 
+            mySocket.emit('relay:off');
+            console.log('relay OFF');  
+        };    
+});
+
+    </script>
+</body>
