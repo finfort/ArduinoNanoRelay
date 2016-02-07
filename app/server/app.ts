@@ -12,13 +12,13 @@ var io = require('socket.io')(httpServer);
 
 var Firmata = require("firmata").Board;
 
-var port = 8000;
 app.use(express.static(__dirname + '/client/public'));
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/client/public/index.html');
 });
 
+var port = process.env.PORT || 8000;
 httpServer.listen(port);
 console.log('Server available at http://localhost:' + port);
 
