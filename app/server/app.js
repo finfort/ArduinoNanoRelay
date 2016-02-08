@@ -38,7 +38,7 @@ board.on("ready", function () {
 });
 //Socket connection handler
 io.on('connection', function (socket) {
-    console.log(socket.id);
+    console.log("socket id " + socket.id);
     socket.on('relay:on', function (data) {
         relay.on();
         console.log('relay ON RECEIVED');
