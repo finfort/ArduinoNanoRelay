@@ -9,10 +9,12 @@ var five = require('johnny-five');
 var EtherPort = require("etherport");
 // import * as Etherport from "etherport";
 var io = require('socket.io')(httpServer);
+var favicon = require('serve-favicon');
 
 var Firmata = require("firmata").Board;
 
 app.use(express.static(__dirname + '/client/public'));
+app.use(favicon(__dirname + '/client/public/favicon.ico'));
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/client/public/index.html');
