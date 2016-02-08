@@ -30,9 +30,10 @@ httpServer.listen(process.env.PORT || 8000,hostname , function(){
 var relay;
 //Arduino board connection
 
-var board = new five.Board({ 
-  port: new EtherPort(3030) 
-});
+// var board = new five.Board({ 
+//   port: new EtherPort(3030) 
+// });
+
 // var board = new Firmata(new EtherPort(3030));
 // var board = new five.Board({ port: "COM3" });
 
