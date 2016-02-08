@@ -9,14 +9,20 @@ var five = require('johnny-five');
 var EtherPort = require("etherport");
 // import * as Etherport from "etherport";
 var io = require('socket.io')(httpServer);
+var favicon = require('serve-favicon');
 var Firmata = require("firmata").Board;
 app.use(express.static(__dirname + '/client/public'));
+app.use(favicon(__dirname + '/client/public/favicon.ico'));
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/client/public/index.html');
 });
-var port = process.env.PORT || 8000;
-httpServer.listen(port);
-console.log('Server available at http://localhost:' + port);
+// var port = process.env.PORT || 8000;
+// httpServer.listen(port);
+// console.log('Server available at http://localhost:' + port);
+var hostname = process.env.HOSTNAME || 'localhost';
+httpServer.listen(process.env.PORT || 8000, hostname, function () {
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 var relay;
 //Arduino board connection
 var board = new five.Board({

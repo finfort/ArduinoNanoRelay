@@ -20,10 +20,13 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/client/public/index.html');
 });
 
-var port = process.env.PORT || 8000;
-httpServer.listen(port);
-console.log('Server available at http://localhost:' + port);
-
+// var port = process.env.PORT || 8000;
+// httpServer.listen(port);
+// console.log('Server available at http://localhost:' + port);
+var hostname = process.env.HOSTNAME || 'localhost';
+httpServer.listen(process.env.PORT || 8000,hostname , function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 var relay;
 //Arduino board connection
 
