@@ -35,19 +35,20 @@ var board = new five.Board({
 });
 // var board = new Firmata(new EtherPort(3030));
 // var board = new five.Board({ port: "COM3" });
-board.on("ready", function() {
-    console.log('Arduino connected');
-    relay = new five.Relay(6);
 
-    // console.log("Arduino connected using Firmata.js!");
-    // var state = 1;
+// board.on("ready", function() {
+//     console.log('Arduino connected');
+//     relay = new five.Relay(6);
 
-    // this.pinMode(6, this.MODES.OUTPUT);
+//     // console.log("Arduino connected using Firmata.js!");
+//     // var state = 1;
 
-    // setInterval(function() {
-    //     this.digitalWrite(6, (state ^= 1));
-    // }.bind(this), 500);
-});
+//     // this.pinMode(6, this.MODES.OUTPUT);
+
+//     // setInterval(function() {
+//     //     this.digitalWrite(6, (state ^= 1));
+//     // }.bind(this), 500);
+// });
 
   
 //Socket connection handler
