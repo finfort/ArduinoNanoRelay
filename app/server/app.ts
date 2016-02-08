@@ -1,11 +1,11 @@
 //  tsc --sourcemap --outDir .\app\server\ .\app\server\app.ts
 //  bower install angularjs#1.4.9 socket.io-client angular-socket-io  --save
-var express = require('express');
-// import * as express from "express";
+// var express = require('express');
+import * as express from "express";
 var app = express();
 var httpServer = require("http").createServer(app);
-var five = require('johnny-five');
-// import * as five from "johnny-five";
+// var five = require('johnny-five');
+import * as five from "johnny-five";
 var EtherPort = require("etherport");
 // import * as Etherport from "etherport";
 var io = require('socket.io')(httpServer);
@@ -19,12 +19,12 @@ app.use(favicon(__dirname + '/client/public/favicon.ico'));
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/client/public/index.html');
 });
-
+app.set('port', (process.env.PORT || 8000));
 // var port = process.env.PORT || 8000;
 // httpServer.listen(port);
 // console.log('Server available at http://localhost:' + port);
 var hostname = process.env.HOSTNAME || 'localhost';
-httpServer.listen(process.env.PORT || 8000,hostname , function(){
+httpServer.listen(app.get('port'),hostname , function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 var relay;
