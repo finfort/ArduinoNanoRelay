@@ -1,5 +1,4 @@
 //  tsc --sourcemap --outDir .\app\server\ .\app\server\app.ts
-//  bower install angularjs#1.4.9 socket.io-client angular-socket-io  --save
 import * as express from "express";
 var app = express();
 var httpServer = require("http").createServer(app);
@@ -28,26 +27,26 @@ console.log("Express server listening on port %d in %s mode", app.get('port'), a
 var relay;
 //Arduino board connection
 
-// var board = new five.Board({ 
-//   port: new EtherPort(3030) 
-// });
+var board = new five.Board({ 
+  port: new EtherPort(3030) 
+});
 
 // var board = new Firmata(new EtherPort(3030));
 // var board = new five.Board({ port: "COM3" });
 
-// board.on("ready", function() {
-//     console.log('Arduino connected');
-//     relay = new five.Relay(6);
+board.on("ready", function() {
+    console.log('Arduino connected');
+    relay = new five.Relay(6);
 
-//     // console.log("Arduino connected using Firmata.js!");
-//     // var state = 1;
+    // console.log("Arduino connected using Firmata.js!");
+    // var state = 1;
 
-//     // this.pinMode(6, this.MODES.OUTPUT);
+    // this.pinMode(6, this.MODES.OUTPUT);
 
-//     // setInterval(function() {
-//     //     this.digitalWrite(6, (state ^= 1));
-//     // }.bind(this), 500);
-// });
+    // setInterval(function() {
+    //     this.digitalWrite(6, (state ^= 1));
+    // }.bind(this), 500);
+});
 
   
 //Socket connection handler
