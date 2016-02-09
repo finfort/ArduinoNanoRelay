@@ -21,7 +21,7 @@ httpServer.listen(app.get('port'));
 console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 //Arduino board connection
 var board = new five.Board({
-    port: new EtherPort(80)
+    port: new EtherPort(81)
 });
 //var board = new Firmata(new EtherPort(3030));
 // var board = new five.Board({ port: "COM3" });
