@@ -1,7 +1,7 @@
 //  tsc --sourcemap --outDir .\app\server\ .\app\server\app.ts
 var express = require("express");
 var app = express();
-var httpServer = require("http").createServer(app);
+var httpServer = require("https").createServer(app);
 // import * as five from "johnny-five";
 var EtherPort = require("etherport");
 var io = require('socket.io')(httpServer);
@@ -41,7 +41,7 @@ board.on("ready", function () {
     this.pinMode(6, this.MODES.OUTPUT);
     setInterval(function () {
         this.digitalWrite(6, (state ^= 1));
-    }.bind(this), 500);
+    }.bind(this), 3000);
 });
 // // Socket connection handler
 // io.on('connection', function(socket) {
@@ -55,7 +55,7 @@ board.on("ready", function () {
 //         console.log('relay OFF RECEIVED');
 //     });
 // });
-// console.log('Waiting for connection');
-setInterval(function () {
-    console.log('Waiting for connection');
-}.bind(this), 1000);
+console.log('Waiting for connection');
+// setInterval(function() {
+//     console.log('Waiting for connection');
+// }.bind(this), 3000);
