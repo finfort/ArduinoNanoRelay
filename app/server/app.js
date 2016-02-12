@@ -1,7 +1,7 @@
 //  tsc --sourcemap --outDir .\app\server\ .\app\server\app.ts
 var express = require("express");
 var app = express();
-var httpServer = require("https").createServer(app);
+var httpServer = require("http").createServer(app);
 var five = require("johnny-five");
 var EtherPort = require("etherport");
 var io = require('socket.io')(httpServer);
@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
 // console.log('Server available at http://localhost:' + port);
 // var hostname = process.env.HOSTNAME || 'localhost';
 httpServer.listen(app.get('port'));
-console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
+console.log("Express server listening on port http://localhost:%d in %s mode", app.get('port'), app.settings.env);
 //Arduino board connection
 var board = new five.Board({
     port: new EtherPort(3030)
@@ -27,22 +27,31 @@ var board = new five.Board({
 // var board = new Firmata(new EtherPort(3030));
 // var board = new five.Board({ port: "COM3" });
 var relay;
-board.on("ready", function () {
-    console.log('Arduino connected');
-    relay = new five.Relay({
-        pin: 6,
-        type: "NC"
+try {
+    board.on("ready", function () {
+        console.log('Arduino connected');
+        relay = new five.Relay({
+            pin: 6,
+            type: "NO"
+        });
+        // setInterval(function() {
+        //     relay.toggle();
+        // }.bind(this), 500);
+        // console.log("Arduino connected using Firmata.js!");
+        // var state = 1;
+        // this.pinMode(6, this.MODES.OUTPUT);
+        // setInterval(function() {
+        //     this.digitalWrite(6, (state ^= 1));
+        // }.bind(this), 500);
     });
-    setInterval(function () {
-        relay.toggle();
-    }.bind(this), 500);
-    // console.log("Arduino connected using Firmata.js!");
-    // var state = 1;
-    // this.pinMode(6, this.MODES.OUTPUT);
-    // setInterval(function() {
-    //     this.digitalWrite(6, (state ^= 1));
-    // }.bind(this), 500);
-});
+    board.on("error", function (msg) {
+        console.log("Board Error:\n ", msg);
+        process.exit(1);
+    });
+}
+catch (error) {
+    console.log("Catch error \n" + error);
+}
 // // Socket connection handler
 io.on('connection', function (socket) {
     console.log("socket id " + socket.id);
