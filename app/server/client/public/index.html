@@ -38,7 +38,9 @@
             mySocket.emit('relay:off');
             console.log('relay OFF');  
         };    
+        mySocket.on('foo', function(msg) {
+            console.info(msg);
+        });
 });
-
     </script>
 </body>

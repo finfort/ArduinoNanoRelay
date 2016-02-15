@@ -54,7 +54,7 @@ board.on("ready", function() {
 } catch (error) {
     console.log("Catch error \n" + error);
 }
-// // Socket connection handler
+// Socket connection handler
 io.on('connection', function(socket) {
     console.log("socket id " + socket.id);
     socket.on('relay:on', function(data) {
@@ -68,11 +68,14 @@ io.on('connection', function(socket) {
 
     });
     var id = setInterval(function() {
-        socket.send(JSON.stringify(new Date()), function() { })
-    }, 1000)
+        let message =JSON.stringify(new Date());
+        console.log(message);
+        socket.emit('foo', message);
+        // socket.emit(JSON.stringify(new Date()), function() { })
+    }, 3000)
 
 
-    socket.on("close", function() {
+    socket.on("disconnect", function() {
         console.log("websocket connection close")
         clearInterval(id)
     })

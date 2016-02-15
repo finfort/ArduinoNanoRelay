@@ -52,7 +52,7 @@ try {
 catch (error) {
     console.log("Catch error \n" + error);
 }
-// // Socket connection handler
+// Socket connection handler
 io.on('connection', function (socket) {
     console.log("socket id " + socket.id);
     socket.on('relay:on', function (data) {
@@ -64,9 +64,12 @@ io.on('connection', function (socket) {
         console.log('relay OFF RECEIVED');
     });
     var id = setInterval(function () {
-        socket.send(JSON.stringify(new Date()), function () { });
-    }, 1000);
-    socket.on("close", function () {
+        var message = JSON.stringify(new Date());
+        console.log(message);
+        socket.emit(message);
+        // socket.emit(JSON.stringify(new Date()), function() { })
+    }, 3000);
+    socket.on("disconnect", function () {
         console.log("websocket connection close");
         clearInterval(id);
     });
