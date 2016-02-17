@@ -23,6 +23,7 @@ var Firmata = require("firmata").Board;
 // console.log("Express server listening on port http://localhost:%d in %s mode", app.get('port'), app.settings.env);
 
 //Arduino board connection
+
 // var board = new five.Board({
 //     port: new EtherPort(3030)
 // });
